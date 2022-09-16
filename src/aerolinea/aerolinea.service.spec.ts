@@ -18,7 +18,7 @@ describe('AerolineaService', () => {
       const aerolinea: AerolineaEntity = await repository.save({
         name: faker.lorem.word(),
         description: faker.lorem.sentence(),
-        foundationDate: faker.date.past(1),
+        foundationDate: faker.date.past(1).toDateString(),
         webPage: faker.internet.url()})
       aerolineasList.push(aerolinea);
     }
@@ -64,7 +64,7 @@ describe('AerolineaService', () => {
       id: "",
       name: faker.lorem.word(),
       description: faker.lorem.sentence(),
-      foundationDate: faker.date.past(1),
+      foundationDate: faker.date.past(1).toISOString(),
       webPage: faker.internet.url(),
       aeropuertos: []
     }
@@ -85,7 +85,7 @@ describe('AerolineaService', () => {
       id: "",
       name: faker.lorem.word(),
       description: faker.lorem.sentence(),
-      foundationDate: faker.date.future(1),
+      foundationDate: faker.date.future(1).toISOString(),
       webPage: faker.internet.url(),
       aeropuertos: []
     }
@@ -96,7 +96,7 @@ describe('AerolineaService', () => {
   it('update should modify a aerolinea', async () => {
     const aerolinea: AerolineaEntity = aerolineasList[0];
     aerolinea.name = "New name";
-    aerolinea.foundationDate = faker.date.past(2);
+    aerolinea.foundationDate = faker.date.past(2).toDateString();
     const updatedAerolinea: AerolineaEntity = await service.update(aerolinea.id, aerolinea);
     expect(updatedAerolinea).not.toBeNull();
     const storedAerolinea: AerolineaEntity = await repository.findOne({ where: { id: aerolinea.id } })
@@ -116,7 +116,7 @@ describe('AerolineaService', () => {
   it('update should throw an exception for an invalid aerolinea date', async () => {
     let aerolinea: AerolineaEntity = aerolineasList[0];
     aerolinea = {
-      ...aerolinea, name: "New name", foundationDate: faker.date.future(10)
+      ...aerolinea, name: "New name", foundationDate: faker.date.future(10).toDateString()
     }
     await expect(() => service.update("0", aerolinea)).rejects.toHaveProperty("message", "The aerolinea foundation date should be in the past")
   });

@@ -13,7 +13,7 @@ export class AerolineaEntity {
     description: string;
 
     @Column()
-    foundationDate: Date;
+    foundationDate: string;
 
     @Column()
     webPage: string;
