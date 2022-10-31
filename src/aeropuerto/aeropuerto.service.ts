@@ -22,6 +22,14 @@ export class AeropuertoService {
 
         return aeropuerto;
     }
+    
+    async findTwo(id: string): Promise<AeropuertoEntity> {
+        const aeropuerto: AeropuertoEntity = await this.aeropuertoRepository.findOne({where: {id}, relations: ["aerolineas"] } );
+        if (!aeropuerto)
+            throw new BusinessLogicException("The aeropuerto with the given id was not found", BusinessError.NOT_FOUND);
+
+        return aeropuerto;
+    }
 
     async create(aeropuerto: AeropuertoEntity): Promise<AeropuertoEntity> {
         if(aeropuerto.code.length != 3){
