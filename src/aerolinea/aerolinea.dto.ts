@@ -1,4 +1,4 @@
-import {IsDate, IsNotEmpty, IsString, IsUrl} from 'class-validator';
+import {IsDate, IsNotEmpty, IsString, IsUrl, IsNumber, IsArray} from 'class-validator';
 export class AerolineaDto {
 
     @IsString()
