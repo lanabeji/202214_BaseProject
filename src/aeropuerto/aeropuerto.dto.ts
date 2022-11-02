@@ -1,4 +1,4 @@
-import {  IsNotEmpty, IsNumber, IsString, IsUrl, IsDate  } from "class-validator";
+import {  IsNotEmpty, IsString  } from "class-validator";
 
 export class AeropuertoDto {
     @IsString()
